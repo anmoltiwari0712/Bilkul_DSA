@@ -4,11 +4,11 @@ public:
         for (int i = 0; i < word.length(); i++) {
             for (int j = 0; j < brokenLetters.length(); j++) {
                 if (word[i] == brokenLetters[j]) {
-                    return true;
+                    return false;
                 }
             }
         }
-        return false;
+        return true;
     }
 
     int canBeTypedWords(string text, string brokenLetters) {
@@ -27,7 +27,7 @@ public:
 
         int count = 0;
         for (int i = 0; i < words.size(); i++) {
-            if (!containsBrokenLetter(words[i], brokenLetters)) {
+            if (containsBrokenLetter(words[i], brokenLetters)) {
                 count++;
             }
         }
