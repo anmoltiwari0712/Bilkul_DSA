@@ -6,13 +6,13 @@ public:
         for(int i=0;i<n;i++){
             int num=nums[i];
             if(num<0){ //negative number handling
-                num = (num) % value + value;
+                num = (num % value + value) % value;
             }
             int rem=num%value;
             mpp[rem]++;
         }
 
-        int ans=0,req_val=0;
+        // int ans=0,req_val=0;
         int i=0;
 
         while(1){
