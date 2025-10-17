@@ -1,21 +1,24 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 class Solution {
 public:
-    vector<string> removeAnagrams(vector<string>& words) {
-        vector<string> result;
-        string prevSorted = "";
-
-        for (auto& word : words) {
-            string sortedWord = word;
-            sort(sortedWord.begin(), sortedWord.end());
-            
-            if (sortedWord != prevSorted) {
-                result.push_back(word);
-                prevSorted = sortedWord;
-            }
+    bool isAnagram(string &a, string &b) {
+        if (a.size() != b.size()){
+            return false;
         }
-        return result;
+        unordered_map<char, int> mpp1, mpp2;
+        for (char c : a){
+            mpp1[c]++;
+        } 
+        for (char c : b){
+            mpp2[c]++;
+        } 
+        return mpp1 == mpp2;
+    }
+    vector<string> removeAnagrams(vector<string>& words) {
+        vector<string> res;
+        for (auto &w : words) {
+            if (res.empty() || !isAnagram(res.back(), w))
+                res.push_back(w);
+        }
+        return res;
     }
 };
