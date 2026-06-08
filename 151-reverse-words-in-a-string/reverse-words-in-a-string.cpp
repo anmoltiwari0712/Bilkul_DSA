@@ -2,10 +2,8 @@ class Solution {
 public:
     string reverseWords(string s) {
         int n=s.length();
-
-        string temp="";
         vector<string> words;
-
+        string temp="";
         for(int i=0;i<n;i++){
             if(s[i]!=' '){
                 temp=temp+s[i];
@@ -14,10 +12,9 @@ public:
                 if(temp!=""){
                     words.push_back(temp);
                     temp="";
-                } 
+                }
             }
         }
-        
         if(temp!=""){
             words.push_back(temp);
         }
@@ -30,7 +27,5 @@ public:
             }
         }
         return res;
-        
-        
     }
 };
