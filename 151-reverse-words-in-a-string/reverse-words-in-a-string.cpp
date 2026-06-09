@@ -3,29 +3,32 @@ public:
     string reverseWords(string s) {
         int n=s.length();
         vector<string> words;
-        string temp="";
+        
+        string res="";
+
         for(int i=0;i<n;i++){
             if(s[i]!=' '){
-                temp=temp+s[i];
+                res=res+s[i];
             }
             else{
-                if(temp!=""){
-                    words.push_back(temp);
-                    temp="";
+                if(res!=""){
+                    words.push_back(res);
+                    res="";
                 }
             }
         }
-        if(temp!=""){
-            words.push_back(temp);
-        }
 
-        string res="";
+        if(res!=""){
+            words.push_back(res);
+        }
+        
+        string temp="";
         for(int i=words.size()-1;i>=0;i--){
-            res=res+words[i];
+            temp=temp+words[i];
             if(i!=0){
-                res=res+" ";
+                temp=temp+" ";
             }
         }
-        return res;
+        return temp;
     }
 };
