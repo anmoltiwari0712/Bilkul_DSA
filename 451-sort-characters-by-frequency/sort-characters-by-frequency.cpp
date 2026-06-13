@@ -1,29 +1,36 @@
 class Solution {
 public:
+    static bool cmp(pair<char,int>& a, pair<char,int>& b){
+        return a.second > b.second;
+    }
+
     string frequencySort(string s) {
 
-        auto cmp = [&](pair<char,int>&a,pair<char,int>&b){
-            return a.second>b.second;
-        };
+        map<char,int> mpp;
 
-        unordered_map<char,int> freq;
-        for(char ch:s){
-            freq[ch]++;
-        }
-        vector<pair<char,int>> freqarr;
-
-        for(auto [ch,fq] : freq){
-            freqarr.push_back({ch,fq});
+        for(int i = 0; i < s.length(); i++){
+            mpp[s[i]]++;
         }
 
-        sort(freqarr.begin(),freqarr.end(),cmp);
+        vector<pair<char,int>> vec;
 
-        string ans="";
-
-        for(auto [ch,fq] : freqarr){
-            ans.append(fq,ch);
+        for(auto it : mpp){
+            vec.push_back({it.first, it.second});
         }
 
-        return ans;
+        sort(vec.begin(), vec.end(), cmp);
+
+        string res = "";
+
+        for(auto it : vec){
+
+            while(it.second > 0){
+                res += it.first;
+                it.second--;
+            }
+
+        }
+
+        return res;
     }
 };
