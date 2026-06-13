@@ -2,7 +2,7 @@ class Solution {
 public:
     void setZeroes(vector<vector<int>>& matrix) {
         int n=matrix.size();  //rows
-        int m=matrix[0].size(); //cols
+        int m=matrix[0].size();  //cols
 
         vector<int> rows(n,0);
         vector<int> cols(m,0);
@@ -24,6 +24,8 @@ public:
                 }
             }
         }
+
+
 
 
     }
