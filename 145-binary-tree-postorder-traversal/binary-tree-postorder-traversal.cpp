@@ -23,8 +23,9 @@ public:
 
         st1.push(root);
 
+
         while(!st1.empty()){
-            TreeNode* node = st1.top();
+            TreeNode* node=st1.top();
             st1.pop();
 
             st2.push(node);
