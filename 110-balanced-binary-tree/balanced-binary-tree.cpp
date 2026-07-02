@@ -18,25 +18,22 @@ public:
         int lh=height(root->left);
         int rh=height(root->right);
 
-        return 1+max(lh,rh);
+        if(lh==-1 || rh==-1){
+            return -1;
+        }
 
+        if(abs(lh-rh)>1){
+            return -1;
+        }
+
+        return 1 + max(lh,rh);
     }
     bool isBalanced(TreeNode* root) {
-        if(root==NULL){
-            return true;
+        int res=height(root);
+
+        if(res==-1){
+            return false;
         }
-
-        bool left=isBalanced(root->left);
-        bool right=isBalanced(root->right);
-
-        bool diff = abs(height(root->left)-height(root->right))<=1;
-
-        if(left && right && diff){
-            return true;
-        }
-
-        return false;
-        
-
+        return true;
     }
 };
