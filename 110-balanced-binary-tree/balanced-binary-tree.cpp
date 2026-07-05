@@ -16,9 +16,14 @@ public:
             return 0;
         }
         int lh=height(root->left);
+
+        if(lh==-1){
+            return -1;
+        }
+
         int rh=height(root->right);
 
-        if(lh==-1 || rh==-1){
+        if(rh==-1){
             return -1;
         }
 
@@ -26,14 +31,16 @@ public:
             return -1;
         }
 
-        return 1 + max(lh,rh);
+        return 1+max(lh,rh);
+
     }
     bool isBalanced(TreeNode* root) {
-        int res=height(root);
+        int ans=height(root);
 
-        if(res==-1){
-            return false;
+        if(ans!=-1){
+            return true;
         }
-        return true;
+
+        return false;
     }
 };
