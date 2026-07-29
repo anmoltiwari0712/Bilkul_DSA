@@ -1,71 +1,61 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution {
 public:
-
     vector<vector<int>> verticalTraversal(TreeNode* root) {
 
-        // column -> row -> sorted values
-        map<int, map<int, multiset<int>>> nodes;
+        //col - row - sorted values
+        map<int, map<int,multiset<int>>> nodes;
 
-        // Queue stores:
-        // Node, Row, Column
+        //(nodes,(col,row))
         queue<pair<TreeNode*, pair<int,int>>> q;
 
-        q.push({root, {0, 0}});
+        q.push({root,{0,0}});
 
         while(!q.empty()){
 
-            TreeNode* currentNode = q.front().first;
-
-            int currentRow = q.front().second.first;
-            int currentColumn = q.front().second.second;
+            TreeNode* currentnode=q.front().first;
+            int currentcol=q.front().second.first;
+            int currentrow=q.front().second.second;
 
             q.pop();
 
-            // Store the node
-            nodes[currentColumn][currentRow].insert(currentNode->val);
+            nodes[currentcol][currentrow].insert(currentnode->val);
 
-            // Left Child
-            if(currentNode->left){
-
-                q.push({
-                    currentNode->left,
-                    {currentRow + 1, currentColumn - 1}
-                });
-
+            if(currentnode->left){
+                q.push({currentnode->left,{currentcol-1,currentrow+1}});
             }
 
-            // Right Child
-            if(currentNode->right){
-
-                q.push({
-                    currentNode->right,
-                    {currentRow + 1, currentColumn + 1}
-                });
-
+            if(currentnode->right){
+                q.push({currentnode->right,{currentcol+1,currentrow+1}});
             }
         }
 
-        vector<vector<int>> answer;
+        vector<vector<int>> ans;
 
-        // Traverse every column
-        for(auto column : nodes){
+        //traverse every col
+        for(auto column: nodes){
+            vector<int> onecolumn;
+            
+            //Traverse every row in that col
+            for(auto row: column.second){
 
-            vector<int> oneColumn;
-
-            // Traverse every row in that column
-            for(auto row : column.second){
-
-                // Traverse all values
-                for(auto value : row.second){
-
-                    oneColumn.push_back(value);
-
+                for(auto value: row.second){
+                    onecolumn.push_back(value);
                 }
             }
-
-            answer.push_back(oneColumn);
+            ans.push_back(onecolumn);
         }
+        return ans;
 
-        return answer;
     }
 };
