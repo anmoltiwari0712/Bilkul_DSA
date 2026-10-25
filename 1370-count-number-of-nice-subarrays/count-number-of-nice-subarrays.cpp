@@ -1,26 +1,27 @@
 class Solution {
 public:
-    int lessthanorequalgoal(vector<int>& nums,int goal){
-        if(goal<0){
-            return 0;
-        }
-        int left=0;
-        int right=0;
-        int n=nums.size();
-        int sum=0;
-        int ans=0;
-        while(right<n){
-            sum=sum+(nums[right]%2);
-            while(sum>goal){
-                sum=sum-(nums[left]%2);
-                left++;
-            }
-            ans=ans+(right-left+1);
-            right++;
-        }
-        return ans;
-    }
     int numberOfSubarrays(vector<int>& nums, int k) {
-        return lessthanorequalgoal(nums, k) - lessthanorequalgoal(nums, k - 1);
+        int n=nums.size();
+        int prefixsum=0;
+        int count=0;
+
+        unordered_map<int,int> mpp;
+
+        mpp[0]=1;
+
+        for(int i=0;i<n;i++){
+            if(nums[i]%2!=0){
+                prefixsum++;
+            }
+
+            int target=prefixsum-k;
+
+            if(mpp.find(target)!=mpp.end()){
+                count+=mpp[target];
+            }
+
+            mpp[prefixsum]++;
+        }   
+        return count;
     }
 };
