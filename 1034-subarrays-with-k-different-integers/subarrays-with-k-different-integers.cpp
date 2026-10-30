@@ -1,29 +1,32 @@
 class Solution {
-public:
-
-    int intermediate(vector<int>& nums, int k){
-        int left=0;
-        int right=0;
+public: 
+    int atmostk(vector<int>& nums, int k ){
         int n=nums.size();
+        int low=0;
+        int high=0;
+
         int count=0;
-        map<int,int> mpp;
 
-        while(right<n){
-            mpp[nums[right]]++;
+        unordered_map<int,int> mpp;
+
+        while(high<n){
+            mpp[nums[high]]++;
+
             while(mpp.size()>k){
-                mpp[nums[left]]--;
-                if(mpp[nums[left]]==0){
-                    mpp.erase(nums[left]);
-                }
-                left++;
-            }
-            count=count+(right-left+1);
-            right++;
+                mpp[nums[low]]--;
 
+                if(mpp[nums[low]]==0){
+                    mpp.erase(nums[low]);
+                }
+                low++;
+            }
+            count+=high-low+1;
+            high++;
         }
+        
         return count;
     }
     int subarraysWithKDistinct(vector<int>& nums, int k) {
-        return intermediate(nums,k)-intermediate(nums,k-1);
+        return atmostk(nums,k) - atmostk(nums,k-1);
     }
 };
