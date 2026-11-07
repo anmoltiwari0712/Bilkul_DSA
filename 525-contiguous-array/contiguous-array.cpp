@@ -1,13 +1,15 @@
 class Solution {
 public:
     int findMaxLength(vector<int>& nums) {
-        int n=nums.size();
-        int sum=0;
-        int maxlen=0;
+       int n=nums.size();
 
-        unordered_map<int,int> mpp;  //<prefixsum,firstoccurence>
-        mpp[0]=-1;
-        for(int i=0;i<n;i++){
+       unordered_map<int,int> mpp;  //prefixsum,index
+       mpp[0]=-1;
+
+       int maxlen=0;
+       int sum=0;
+
+       for(int i=0;i<n;i++){
             if(nums[i]==0){
                 sum++;
             }
@@ -18,9 +20,11 @@ public:
                 maxlen=max(maxlen,i-mpp[sum]);
             }
             else{
-                mpp[sum]=i; //storing first occurence of prefixsum
+                mpp[sum]=i; 
             }
-        }
-        return maxlen;
+       }
+       return maxlen;
+
+       
     }
 };
