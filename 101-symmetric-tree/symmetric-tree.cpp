@@ -21,12 +21,13 @@ public:
         }
 
         return helper(leftnode->left,rightnode->right) && helper(leftnode->right,rightnode->left);
+
+
     }
     bool isSymmetric(TreeNode* root) {
         if(root==NULL){
             return true;
         }
-
         return helper(root->left,root->right);
     }
 };
