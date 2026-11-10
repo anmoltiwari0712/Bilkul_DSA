@@ -11,20 +11,22 @@
  */
 class Solution {
 public:
-    bool helper(TreeNode* leftNode, TreeNode* rightNode){
-        if(leftNode==NULL && rightNode==NULL){
+    bool helper(TreeNode* leftnode, TreeNode* rightnode){
+        if(leftnode==NULL && rightnode==NULL){
             return true;
         }
-        if(leftNode==NULL || rightNode==NULL || leftNode->val!=rightNode->val){
+
+        if(leftnode==NULL || rightnode==NULL || leftnode->val!=rightnode->val){
             return false;
         }
 
-        return helper(leftNode->left,rightNode->right) && helper(leftNode->right,rightNode->left);
+        return helper(leftnode->left,rightnode->right) && helper(leftnode->right,rightnode->left);
     }
     bool isSymmetric(TreeNode* root) {
         if(root==NULL){
             return true;
         }
+
         return helper(root->left,root->right);
     }
 };
